@@ -3,7 +3,7 @@
 //array item's length and adds it to count
 //it then creates a variable called average
 //which is count/array.length and sets it to
-//to decimel points. It then alters the html
+//two decimel points. It then alters the html
 //to display the average
 function wordAvg(array){
 	var count = 0;
@@ -11,7 +11,7 @@ function wordAvg(array){
 		count += array[i].length;
 	}
 	var average = (count/(array.length)).toFixed(2);
-	$(".js-average-wordLength").text(average);
+	$(".js-average-wordLength").text(average + " characters");
 }
 
 //gets word count of an array
@@ -20,7 +20,7 @@ function wordCount(array){
 	$(".js-wordCount").text(array.length);
 }
 
-//this initiates  uniqArray and then a for loop.
+//this initiates uniqArray and then a for loop.
 //it runs through each item of the array and uses
 //indexOf to see if the array item already appears
 //in uniqArray. If it does then it does nothing
@@ -50,17 +50,15 @@ function removeHidden(item){
 //the functions as it is an array of individual strings
 //without special characters.
 function pullText(){
-	$('.js-form').submit(function(event){
-		event.preventDefault();
-		$("body").on('click', '[class=js-button]', function(){
-			var allText = $("#user-text").val();
-			var alphaText = allText.replace(/[^a-zA-Z ]/g, "");
-			var textArray = alphaText.split(" ");
-			wordCount(textArray);
-			uniqWord(textArray);
-			wordAvg(textArray);
-			removeHidden(".text-report");
-		})
+	$('.js-form').submit(function(e){
+		e.preventDefault();
+		var allText = $("#user-text").val();
+		var alphaText = allText.replace(/[^a-zA-Z ]/g, "");
+		var textArray = alphaText.split(" ");
+		wordCount(textArray);
+		uniqWord(textArray);
+		wordAvg(textArray);
+		removeHidden(".text-report");
 	})
 }
 
